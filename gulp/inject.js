@@ -11,13 +11,11 @@ var _ = require('lodash');
 
 var browserSync = require('browser-sync');
 
-gulp.task('inject-reload', ['inject'], function ()
-{
+gulp.task('inject-reload', ['inject'], function () {
     browserSync.reload();
 });
 
-gulp.task('inject', ['scripts', 'styles'], function ()
-{
+gulp.task('inject', ['compile-ts', 'scripts', 'styles'], function () {
     var injectStyles = gulp.src([
         path.join(conf.paths.tmp, '/serve/app/**/*.css'),
         path.join('!' + conf.paths.tmp, '/serve/app/vendor.css')

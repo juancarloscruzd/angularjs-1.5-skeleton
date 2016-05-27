@@ -14,16 +14,17 @@ gulp.task('scripts-reload', function ()
         .pipe(browserSync.stream());
 });
 
-gulp.task('scripts', ['compile-ts'], function ()
+gulp.task('scripts', function ()
 {
     return buildScripts();
 });
 
 gulp.task('compile-ts', function ()
 {
-  gulp.src('./src/app/**/*.ts')
+  return gulp.src('./src/app/**/*.ts')
     .pipe($.tsc({
-      sourceMap: true
+      sourceMap: true,
+      tmpDir: '.tmp'
     }))
     .pipe(gulp.dest('./src/app/'));
 });
