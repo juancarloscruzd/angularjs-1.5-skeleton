@@ -14,17 +14,26 @@ gulp.task('scripts-reload', function ()
         .pipe(browserSync.stream());
 });
 
-gulp.task('scripts', function ()
+gulp.task('scripts', ['compile'], function ()
 {
     return buildScripts();
+});
+
+gulp.task('compile', function ()
+{
+  gulp.src('./src/app/**/*.ts')
+    .pipe($.tsc({
+      sourceMap: true
+    }))
+    .pipe(gulp.dest('./src/app/'));
 });
 
 function buildScripts()
 {
     return gulp.src(path.join(conf.paths.src, '/app/**/*.js'))
-        // Enable the following two lines if you want linter
-        // to check your code every time the scripts reloaded
-        //.pipe($.eslint())
-        //.pipe($.eslint.format())
-        .pipe($.size())
+      // Enable the following two lines if you want linter
+      // to check your code every time the scripts reloaded
+      //.pipe($.eslint())
+      //.pipe($.eslint.format())
+      .pipe($.size())
 };
