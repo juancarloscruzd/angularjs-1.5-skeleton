@@ -11,7 +11,12 @@ function isOnlyChange(event)
     return event.type === 'changed';
 }
 
-gulp.task('watch', ['inject'], function ()
+gulp.task('watch-ts', function ()
+{
+  gulp.watch('./src/app/**/*.ts', ['compile-ts']);
+});
+
+gulp.task('watch', ['watch-ts', 'inject'], function ()
 {
     gulp.watch([path.join(conf.paths.src, '/*.html'), 'bower.json'], ['inject-reload']);
 

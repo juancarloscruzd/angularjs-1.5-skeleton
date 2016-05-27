@@ -14,12 +14,12 @@ gulp.task('scripts-reload', function ()
         .pipe(browserSync.stream());
 });
 
-gulp.task('scripts', ['compile'], function ()
+gulp.task('scripts', ['compile-ts'], function ()
 {
     return buildScripts();
 });
 
-gulp.task('compile', function ()
+gulp.task('compile-ts', function ()
 {
   gulp.src('./src/app/**/*.ts')
     .pipe($.tsc({
